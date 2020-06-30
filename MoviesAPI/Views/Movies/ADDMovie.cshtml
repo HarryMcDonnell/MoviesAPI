@@ -5,4 +5,19 @@
     ViewData["Title"] = "Add Movie";
 }
 
-    <h1> ADDMOVIES</h1>
+    <h1>ADD MOVIES</h1>
+
+    <form method="POST" action="ADDMovie.cshtml">
+        <label for="MovieName">Movie Name:</label>
+        <input type="text" id="MovieName" name="MovieName"><br>
+        <label for="AgeRating">Age Rating:</label>
+        <input type="text" id="AgeRating" name="AgeRating"><br>
+        <label for="Price">Price:</label>
+        <input type="number" step="0.01" id="Price" name="Price"><br>
+        <label for="ReleaseDate">Release Date:</label>
+        <input type="date" id="ReleaseDate" name="ReleaseDate"><br>
+        <label for="Genre">Genre:</label>
+        <input type="text" id="Genre" name="Genre"><br>
+        <input type="submit" for=""submit" name="submit"/>
+    </form>
+

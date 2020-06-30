@@ -14,6 +14,7 @@ namespace MoviesAPI.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+
             return View();
         }
         public IActionResult GETMovie()
