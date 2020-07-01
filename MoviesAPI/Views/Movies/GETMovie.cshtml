@@ -1,18 +1,4 @@
 ﻿
-    @*For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-@{
-    ViewData["Title"] = "Search";
-}
-
-<h1> GETMovie</h1>
-
-<p>Search for the movie by the ID: </p>
-<form method="GET" action="GETMovie">
-    <input name="MovieID" type="number" />
-    <input type="submit" for="submit" />
-</form>*@
-
 @model IEnumerable<MoviesAPI.Models.MovieModel>
 
 @{
@@ -71,3 +57,103 @@
         }
     </tbody>
 </table>
+
+
+
+@*@model MoviesAPI.Models.MovieModel
+
+
+
+@{
+    ViewBag.Title = "GETMovie";
+}
+<h1>GETMovie</h1>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MovieID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MovieID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MovieID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MovieID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgeRating)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.MovieID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.MovieName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.AgeRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Genre)
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@

@@ -12,23 +12,23 @@ namespace MoviesAPI.Models
     {   
         private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=dyw@cthyg@22;";
 
-        //public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param)
-        //{
-        //    using (SqlConnection con = new SqlConnection(connectionString))
-        //    {
-        //        con.Open();
-        //        con.Execute(procedureName, param, commandType: CommandType.StoredProcedure);
-        //    }
-        //}
+        public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                con.Execute(procedureName, param, commandType: CommandType.StoredProcedure);
+            }
+        }
 
-        //public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param)
-        //{
-        //    using (SqlConnection con = new SqlConnection(connectionString))
-        //    {
-        //        con.Open();
-        //        return con.ExecuteScalar<T>(procedureName, param, commandType: CommandType.StoredProcedure);
-        //    }
-        //}
+        public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                return con.ExecuteScalar<T>(procedureName, param, commandType: CommandType.StoredProcedure);
+            }
+        }
 
         public static IEnumerable<T> ReturnList<T> (string procedureName, DynamicParameters param = null)
         {

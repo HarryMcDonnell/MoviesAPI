@@ -22,22 +22,49 @@ namespace MoviesAPI.Controllers
         public IActionResult GETMovie()
         {
             var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("MovieID", 3);
+            dynamicParameters.Add("MovieID", 1);
             return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters));
         }
+
+        //[HttpGet]
+        //public IActionResult GETMovie(int MovieID = 0)
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult GETMovie(MovieModel movieModel)
+        //{
+        //    DynamicParameters param = new DynamicParameters();
+        //    param.Add("@MovieID", movieModel.MovieID);
+        //    DapperORM.ExecuteWithoutReturn("SelectMovieByID", param);
+
+        //    return RedirectToAction("GETMovie");
+
+        //}
+
+
         public IActionResult GETALLMovies()
         {
             return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null));
         }
-        public IActionResult ADDMovie()
+        [HttpGet]
+        public IActionResult ADDMovie(int MovieID = 0)
         {
-            var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("MovieName", "Shrek");
-            dynamicParameters.Add("AgeRating", "12A");
-            dynamicParameters.Add("Price", 17.99);
-            dynamicParameters.Add("ReleaseDate", "2020-10-01");
-            dynamicParameters.Add("Genre", "Horror");
-            return View(DapperORM.ReturnList<MovieModel>("CreateNewMovie", dynamicParameters));
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ADDMovie(MovieModel movieModel)
+        { 
+            DynamicParameters param = new DynamicParameters();
+            param.Add("@MovieName", movieModel.MovieName);
+            param.Add("@AgeRating", movieModel.AgeRating);
+            param.Add("@Price", movieModel.Price);
+            param.Add("@ReleaseDate", movieModel.ReleaseDate);
+            param.Add("@Genre", movieModel.Genre);
+            DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
+
+            return RedirectToAction("ADDMovie");
+            
         }
         public IActionResult REMOVEMovie()
         {
