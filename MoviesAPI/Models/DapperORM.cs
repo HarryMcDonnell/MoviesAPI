@@ -30,6 +30,7 @@ namespace MoviesAPI.Models
             }
         }
 
+
         public static IEnumerable<T> ReturnList<T> (string procedureName, DynamicParameters param = null)
         {
             using (SqlConnection con = new SqlConnection(connectionString))

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Data.SqlClient;// need to add this dependancy by right clicking in dependencies and search for it and add it.
+using System.Data.SqlClient;
 
 namespace MoviesAPI
 {

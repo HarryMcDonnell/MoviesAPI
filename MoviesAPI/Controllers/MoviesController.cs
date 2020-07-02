@@ -19,28 +19,14 @@ namespace MoviesAPI.Controllers
 
             return View();
         }
-        public IActionResult GETMovie()
+
+        [HttpGet]
+        public IActionResult GETMovie(int MovieID = 0)
         {
             var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("MovieID", 1);
+            dynamicParameters.Add("MovieID", MovieID);
             return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters));
         }
-
-        //[HttpGet]
-        //public IActionResult GETMovie(int MovieID = 0)
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult GETMovie(MovieModel movieModel)
-        //{
-        //    DynamicParameters param = new DynamicParameters();
-        //    param.Add("@MovieID", movieModel.MovieID);
-        //    DapperORM.ExecuteWithoutReturn("SelectMovieByID", param);
-
-        //    return RedirectToAction("GETMovie");
-
-        //}
 
 
         public IActionResult GETALLMovies()
@@ -54,7 +40,7 @@ namespace MoviesAPI.Controllers
         }
         [HttpPost]
         public ActionResult ADDMovie(MovieModel movieModel)
-        { 
+        {
             DynamicParameters param = new DynamicParameters();
             param.Add("@MovieName", movieModel.MovieName);
             param.Add("@AgeRating", movieModel.AgeRating);
@@ -63,15 +49,31 @@ namespace MoviesAPI.Controllers
             param.Add("@Genre", movieModel.Genre);
             DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
 
-            return RedirectToAction("ADDMovie");
-            
+            return RedirectToAction("GETALLMovies");
+
         }
-        public IActionResult REMOVEMovie()
+
+        public ActionResult REMOVEMovie()
         {
-            var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("MovieID", 1007);
-            return View(DapperORM.ReturnList<MovieModel>("DeleteMovie", dynamicParameters));
+            return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null));
         }
+        [HttpGet]
+
+        public ActionResult REMOVEMovie(int MovieID = 0)
+        {
+            if (MovieID == 0)
+                return View();
+            else
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@MovieID", MovieID);
+                DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
+                return RedirectToAction("GETALLMovies");
+
+            }
+        }
+
     }
 }
+
 

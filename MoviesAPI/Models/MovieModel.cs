@@ -16,5 +16,6 @@ namespace MoviesAPI.Models
         public string Genre { get; set; }
     }
 
+
 }
 
