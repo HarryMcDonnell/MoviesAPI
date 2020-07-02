@@ -33,8 +33,9 @@ namespace MoviesAPI.Controllers
             return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null)); // null is because we don't need to pass any inputs/parameters.
         }
 
-        [HttpGet] // unsure if needed. used on an extension
-        public IActionResult ADDMovie(int MovieID = 0)
+
+    
+        public IActionResult ADDMovie()
         {
             return View();
         }
@@ -55,7 +56,7 @@ namespace MoviesAPI.Controllers
 
         public ActionResult REMOVEMovie() // not a get or post
         {
-            return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null));
+            return View();
         }
 
         [HttpGet]
