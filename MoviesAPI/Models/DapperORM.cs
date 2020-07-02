@@ -10,23 +10,23 @@ namespace MoviesAPI.Models
 {
     public static class DapperORM
     {   
-        private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=dyw@cthyg@22;";
+        private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=<YourStrong@Passw0rd>;"; //can we change this to builder? do we need to?
 
         public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param)
         {
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString)) // new instance of the connection string
             {
-                con.Open();
-                con.Execute(procedureName, param, commandType: CommandType.StoredProcedure);
+                con.Open(); // open it
+                con.Execute(procedureName, param, commandType: CommandType.StoredProcedure); // once opened excecute the store procedure
             }
         }
 
-        public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param)
+        public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param) // what is return scalar?
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                return con.ExecuteScalar<T>(procedureName, param, commandType: CommandType.StoredProcedure);
+                return con.ExecuteScalar<T>(procedureName, param, commandType: CommandType.StoredProcedure); 
             }
         }
 
@@ -36,7 +36,7 @@ namespace MoviesAPI.Models
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                return con.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure);
+                return con.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure); // excecutes a query, returnes the data types as T
             }
         }
 
