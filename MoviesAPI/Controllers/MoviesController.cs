@@ -30,10 +30,9 @@ namespace MoviesAPI.Controllers
 
         public IActionResult GETALLMovies() // dont need a get because it will always just display on the page. we just need to run it on the server
         {
+            
             return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null)); // null is because we don't need to pass any inputs/parameters.
         }
-
-
     
         public IActionResult ADDMovie()
         {
@@ -54,10 +53,10 @@ namespace MoviesAPI.Controllers
 
         }
 
-        public ActionResult REMOVEMovie() // not a get or post
-        {
-            return View();
-        }
+        //public ActionResult REMOVEMovie() // not a get or post
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         public ActionResult REMOVEMovie(int MovieID = 0)

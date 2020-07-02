@@ -28,10 +28,10 @@ JSON based
 [ ] Create GetMovie method: Method to return movies details for a specific movie. using Input ID.
 
     input:
-    [ ]int ID
+    [x]int ID
 
     output:
-    [ ]Returns all movie details for a particular movie
+    [x]Returns all movie details for a particular movie
 
     Validation:
     [ ]Id be an int bigger than 0
@@ -43,11 +43,15 @@ JSON based
 
 [ ] Create GetAllMovies method: Method to return all movies with no inputs.
 
+    logging:
+    [ ]request and response to console
+
     input:
     [x]null
 
     output:
-    [ ] Movie type
+    [x] Movie type
+
 
     GetMovie Error Handling:
     [ ]400 for invalid input type or null
@@ -55,6 +59,9 @@ JSON based
     [ ]500 for server error
 
 [ ] Create AddMovie Method:Method to insert a new movie record.
+
+    logging:
+    [ ]request and response to console
 
     input:
     [x]All movie properties except Id
@@ -71,11 +78,14 @@ JSON based
 
 [ ]Create DeleteMovie Method:Method to delete an existing movie.
 
+    logging:
+    [ ]request and response to console
+
     input:
-    [ ]int ID
+    [x]int ID
 
     output:
-    [ ]return remaining movies from DB 
+    [x]return remaining movies from DB 
 
     Error Handling:
     [ ]400 for invalid input type or null
