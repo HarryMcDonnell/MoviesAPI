@@ -126,4 +126,3 @@ output:
 #[x] connect MoviesAPI to database
 #[ ] use postman to validate APIs created
 #[ ] Sign up to Swagger for API documentation
-
