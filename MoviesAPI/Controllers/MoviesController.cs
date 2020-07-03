@@ -14,23 +14,32 @@ namespace MoviesAPI.Controllers
 {
     public class MoviesController : Controller
     {
+       
         // GET: /<controller>/
         public IActionResult Index()
-        { 
+        {
             return View();
         }
 
         [HttpGet] //just want a get request not posting
         public IActionResult GETMovie(int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
-            var dynamicParameters = new DynamicParameters(); //built in parameter bag.
-            dynamicParameters.Add("@MovieID", MovieID); // @ knowing its from the input value. will work without.
-            return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // built in store procedure
+            if (MovieID <= 0)
+            {
+                return View();
+            }
+            else
+            {
+                var dynamicParameters = new DynamicParameters(); //built in parameter bag.
+                dynamicParameters.Add("@MovieID", MovieID); // @ knowing its from the input value. will work without.
+                                                            //Console.WriteLine($"The user requested the movieID {MovieID}");
+                Console.WriteLine($"The user requested the SeleceMovieByID");
+                return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // built in store procedure
+            }
         }
 
         public IActionResult GETALLMovies() // dont need a get because it will always just display on the page. we just need to run it on the server
-        {
-            
+        { 
             return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null)); // null is because we don't need to pass any inputs/parameters.
         }
     
@@ -47,6 +56,7 @@ namespace MoviesAPI.Controllers
             param.Add("@Price", movieModel.Price);
             param.Add("@ReleaseDate", movieModel.ReleaseDate);
             param.Add("@Genre", movieModel.Genre);
+            Console.WriteLine("The user requested to create new movie");
             DapperORM.ExecuteWithoutReturn("CreateNewMovie", param); // store procedure
 
             return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
@@ -61,12 +71,15 @@ namespace MoviesAPI.Controllers
         [HttpGet]
         public ActionResult REMOVEMovie(int MovieID = 0)
         {
-            if (MovieID == 0)
+            if (MovieID <= 0)
+            {
                 return View();
+            }
             else
             {
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@MovieID", MovieID);
+                //Console.WriteLine();
                 DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
                 return RedirectToAction("GETALLMovies"); // to show its been removed
 
