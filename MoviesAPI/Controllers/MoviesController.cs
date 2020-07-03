@@ -24,18 +24,18 @@ namespace MoviesAPI.Controllers
         [HttpGet] //just want a get request not posting
         public IActionResult GETMovie(int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
-            if (MovieID <= 0)
-            {
-                return View();
-            }
-            else
-            {
+            //if (MovieID <= 0)
+            //{
+            //    return View();
+            //}
+            //else
+            //{
                 var dynamicParameters = new DynamicParameters(); //built in parameter bag.
                 dynamicParameters.Add("@MovieID", MovieID); // @ knowing its from the input value. will work without.
                                                             //Console.WriteLine($"The user requested the movieID {MovieID}");
                 Console.WriteLine($"The user requested the SeleceMovieByID");
                 return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // built in store procedure
-            }
+            //}
         }
 
         public IActionResult GETALLMovies() // dont need a get because it will always just display on the page. we just need to run it on the server

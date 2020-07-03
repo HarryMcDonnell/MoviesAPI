@@ -11,7 +11,7 @@ namespace MoviesAPI.Models
     public static class DapperORM
     {
 
-        private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=<YourStrong@Passw0rd>;"; //can we change this to builder? do we need to? dyw@cthyg@22 <YourStrong@Passw0rd>
+        private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=<pass123word;"; //can we change this to builder? do we need to? dyw@cthyg@22 <YourStrong@Passw0rd>
 
 
         public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param)
