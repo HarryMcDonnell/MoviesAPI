@@ -8,6 +8,7 @@ using MoviesAPI.Models;
 using Dapper;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,19 +24,30 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet] //just want a get request not posting
-        public IActionResult GETMovie(int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
+        public IActionResult GETMovie(bool jsonData, int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
-                var dynamicParameters = new DynamicParameters(); //built in parameter bag.
-                dynamicParameters.Add("@MovieID", MovieID); // @ knowing its from the input value. will work without.
+            var dynamicParameters = new DynamicParameters(); //built in parameter bag.
+            dynamicParameters.Add("@MovieID", MovieID); // @ knowing its from the input value. will work without.
+            if (jsonData == true)
+            {
+                return Json(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters));
+            }
                 return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // built in store procedure
         }
 
-        public IActionResult GETALLMovies() // dont need a get because it will always just display on the page. we just need to run it on the server
+        [HttpGet]
+        public IActionResult GETALLMovies(bool jsonData) // dont need a get because it will always just display on the page. we just need to run it on the server
         {
+            if (jsonData == true)
+            {
+                return Json(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null).ToList());
+            }
             return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null)); // null is because we don't need to pass any inputs/parameters.
+
         }
-    
-        public IActionResult ADDMovie()
+
+
+        public IActionResult ADDMovie(bool jsonData)
         {
             return View();
         }
@@ -49,6 +61,7 @@ namespace MoviesAPI.Controllers
             param.Add("@ReleaseDate", movieModel.ReleaseDate);
             param.Add("@Genre", movieModel.Genre);
             DapperORM.ExecuteWithoutReturn("CreateNewMovie", param); // store procedure
+
 
             return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
 

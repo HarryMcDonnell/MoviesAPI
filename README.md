@@ -93,6 +93,7 @@ JSON based
     [ ]500 for server error
 
 
+<<<<<<< HEAD
 #EXTENSIONS
 [ ]Create UpdateMovie Method:Method to update an existing movie.
 
@@ -116,6 +117,9 @@ JSON based
     [ ]500 for server error
 
 #[x]Azzure data studio - create a database called MoviesDB
+=======
+#[x]Azure data studio - create a database called MoviesDB
+>>>>>>> 87ea770... validation and returns json data
 
 #Extensions database:
 [x]SP Name: “GetMovie”
@@ -146,5 +150,5 @@ output:
 
 #[x] install Dapper nuget package
 #[x] connect MoviesAPI to database
-#[ ] use postman to validate APIs created
+#[x] use postman to validate APIs created
 #[ ] Sign up to Swagger for API documentation

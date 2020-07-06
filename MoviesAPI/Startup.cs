@@ -44,6 +44,8 @@ namespace MoviesAPI
             }
             else
             {
+                app.UseStatusCodePagesWithRedirects("~/Home/StatusCodePage");
+
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }

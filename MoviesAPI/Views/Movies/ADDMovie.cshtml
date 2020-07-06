@@ -7,11 +7,11 @@
 
 <div class="form-group">
     <form method="POST" action="ADDMovie">
-        Title: <input name="MovieName" type="text" minlength="1" maxlength="75" /><br />
-        Age Rating: <input name="AgeRating" type="text" minlength="1" maxlength="3"/><br />
-        Price (£): <input name="Price" type="number" step="any" min="0" max="99.99"/><br />
-        Release Date: <input name="ReleaseDate" type="date"/><br />
-        Genre: <input name="Genre" type="text" minlength="1" maxlength="50"/><br />
+        Title: <input name="MovieName" type="text" minlength="1" maxlength="75" required/><br />
+        Age Rating: <input name="AgeRating" type="text" minlength="1" maxlength="3" required/><br />
+        Price (£): <input name="Price" type="number" step="any" min="0" max="99.99" required/><br />
+        Release Date: <input name="ReleaseDate" type="date" min="1753-01-01" max="9999-12-31" required/><br />
+        Genre: <input name="Genre" type="text" minlength="1" maxlength="50" required/><br />
         <input type="submit" for="submit"/>
     </form>
  </div>
