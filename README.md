@@ -116,10 +116,9 @@ JSON based
     [ ]404 for not found
     [ ]500 for server error
 
-#[x]Azzure data studio - create a database called MoviesDB
-=======
+
 #[x]Azure data studio - create a database called MoviesDB
->>>>>>> 87ea770... validation and returns json data
+[x] validation and returns json data
 
 #Extensions database:
 [x]SP Name: “GetMovie”
