@@ -34,7 +34,7 @@ JSON based
     [x]Returns all movie details for a particular movie
 
     Validation:
-    [ ]Id be an int bigger than 0
+    [x]Id be an int bigger than 0
 
      GetMovie Error Handling:
     [ ]400 for invalid input type or null
@@ -44,7 +44,7 @@ JSON based
 [ ] Create GetAllMovies method: Method to return all movies with no inputs.
 
     logging:
-    [ ]request and response to console
+    [x]request and response to console
 
     input:
     [x]null
@@ -61,7 +61,7 @@ JSON based
 [ ] Create AddMovie Method:Method to insert a new movie record.
 
     logging:
-    [ ]request and response to console
+    [x]request and response to console
 
     input:
     [x]All movie properties except Id
@@ -79,7 +79,7 @@ JSON based
 [ ]Create DeleteMovie Method:Method to delete an existing movie.
 
     logging:
-    [ ]request and response to console
+    [x]request and response to console
 
     input:
     [x]int ID
@@ -93,9 +93,31 @@ JSON based
     [ ]500 for server error
 
 
+#EXTENSIONS
+[ ]Create UpdateMovie Method:Method to update an existing movie.
+
+    logging:
+    [ ]request and response to console
+
+    input:
+    [ ]All movie properties
+
+    output:
+    [ ]Updated movie record
+
+    Validation:
+    [ ]movie should exist before updating or throw error
+    [ ]all updated properties should be of the correct type
+
+
+    Error Handling:
+    [ ]400 for invalid input type or null
+    [ ]404 for not found
+    [ ]500 for server error
+
 #[x]Azzure data studio - create a database called MoviesDB
 
-Extensions database:
+#Extensions database:
 [x]SP Name: “GetMovie”
 input:
 [x]int Id
