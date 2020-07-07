@@ -40,13 +40,16 @@ namespace MoviesAPI
 
                 if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                //app.UseStatusCodePages();
+                app.UseStatusCodePagesWithReExecute("/Movies/Error", "?code={0}");
+
+
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("~/Home/StatusCodePage");
-
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseStatusCodePages();
+                app.UseStatusCodePagesWithReExecute("/Movies/Error", "?code={0}");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

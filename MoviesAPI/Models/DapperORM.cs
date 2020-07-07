@@ -14,6 +14,7 @@ namespace MoviesAPI.Models
         private static string connectionString = @"Data Source=localhost,1433;Initial Catalog=MoviesDB;User ID=sa;Password=dyw@cthyg@22"; //can we change this to builder? do we need to? dyw@cthyg@22 <YourStrong@Passw0rd>
 
 
+
         public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param)
         {
 
@@ -39,11 +40,13 @@ namespace MoviesAPI.Models
 
         public static IEnumerable<T> ReturnList<T> (string procedureName, DynamicParameters param = null)
         {
+
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
-                    return con.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure); // excecutes a query, returnes the data types as T
+                    return con.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure); // excecutes a query, returns the data types as T
                 }
+
         }
     }
 }

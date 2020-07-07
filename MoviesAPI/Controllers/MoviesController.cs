@@ -14,16 +14,16 @@ using Newtonsoft.Json;
 
 namespace MoviesAPI.Controllers
 {
+
     public class MoviesController : Controller
     {
-       
-        // GET: /<controller>/
+
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet] //just want a get request not posting
+       
         public IActionResult GETMovie(bool jsonData, int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
             var dynamicParameters = new DynamicParameters(); //built in parameter bag.
@@ -32,27 +32,27 @@ namespace MoviesAPI.Controllers
             {
                 return Json(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters));
             }
-                return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // built in store procedure
+            return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // 1st param is stored procedure, second is parameter bag
         }
 
-        [HttpGet]
-        public IActionResult GETALLMovies(bool jsonData) // dont need a get because it will always just display on the page. we just need to run it on the server
+  
+        public IActionResult GETALLMovies(bool jsonData)
         {
             if (jsonData == true)
             {
                 return Json(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null).ToList());
             }
-            return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null)); // null is because we don't need to pass any inputs/parameters.
+            return View(DapperORM.ReturnList<MovieModel>("SelectAllMovies", null));
 
         }
 
-
-        public IActionResult ADDMovie(bool jsonData)
+     
+        public IActionResult ADDMovie()
         {
             return View();
         }
-        [HttpPost] // add movie form
-        public ActionResult ADDMovie(MovieModel movieModel) //imported a new instance of our Movie Model and called it as a lowercase m.
+        [HttpPost]
+        public ActionResult ADDMovie(MovieModel movieModel) // takes data in the format of our MovieModel class
         {
             DynamicParameters param = new DynamicParameters(); //bag
             param.Add("@MovieName", movieModel.MovieName); // adding these to our bag
@@ -60,7 +60,7 @@ namespace MoviesAPI.Controllers
             param.Add("@Price", movieModel.Price);
             param.Add("@ReleaseDate", movieModel.ReleaseDate);
             param.Add("@Genre", movieModel.Genre);
-            DapperORM.ExecuteWithoutReturn("CreateNewMovie", param); // store procedure
+            DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
 
 
             return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
@@ -68,7 +68,7 @@ namespace MoviesAPI.Controllers
         }
 
 
-        [HttpGet]
+ 
         public ActionResult REMOVEMovie(int MovieID = 0)
         {
             if (MovieID <= 0)
@@ -84,6 +84,23 @@ namespace MoviesAPI.Controllers
 
 
             }
+        }
+
+        public IActionResult Error(int code)
+        {
+            Console.WriteLine($"Error {code}");
+            ViewBag.StatusCode = code;
+            return View($"HandleErrors/Error");
+
+            //if (code == 404)
+            //{
+
+            //    return View($"HandleErrors/Error{code}");
+            //}
+            //else
+            //{
+            //    return View("HandleErrors/Error");
+            //}
         }
 
     }
