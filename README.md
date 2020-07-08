@@ -89,11 +89,10 @@ JSON based
 
     Error Handling:
     [ ]400 for invalid input type or null
-    [ ]404 for not found
+    [x]404 for not found
     [ ]500 for server error
 
 
-<<<<<<< HEAD
 #EXTENSIONS
 [ ]Create UpdateMovie Method:Method to update an existing movie.
 
@@ -101,19 +100,19 @@ JSON based
     [ ]request and response to console
 
     input:
-    [ ]All movie properties
+    [x]All movie properties
 
     output:
-    [ ]Updated movie record
+    [x]Updated movie record
 
     Validation:
-    [ ]movie should exist before updating or throw error
-    [ ]all updated properties should be of the correct type
+    [X]movie should exist before updating or throw error
+    [x]all updated properties should be of the correct type
 
 
     Error Handling:
     [ ]400 for invalid input type or null
-    [ ]404 for not found
+    [x]404 for not found
     [ ]500 for server error
 
 

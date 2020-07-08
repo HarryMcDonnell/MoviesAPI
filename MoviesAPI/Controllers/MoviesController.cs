@@ -10,6 +10,8 @@ using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Routing;
+using System.Data;
+using System.Data.SqlClient;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +26,7 @@ namespace MoviesAPI.Controllers
             return View();
         }
 
-       
+
         public IActionResult GETMovie(bool jsonData, int MovieID = 0) // we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
             var dynamicParameters = new DynamicParameters(); //built in parameter bag.
@@ -36,7 +38,7 @@ namespace MoviesAPI.Controllers
             return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // 1st param is stored procedure, second is parameter bag
         }
 
-  
+
         public IActionResult GETALLMovies(bool jsonData)
         {
             if (jsonData == true)
@@ -47,11 +49,12 @@ namespace MoviesAPI.Controllers
 
         }
 
-     
+
         public IActionResult ADDMovie()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult ADDMovie(MovieModel movieModel) // takes data in the format of our MovieModel class
         {
@@ -63,13 +66,12 @@ namespace MoviesAPI.Controllers
             param.Add("@Genre", movieModel.Genre);
             DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
 
-
             return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
 
         }
 
 
- 
+
         public ActionResult REMOVEMovie(int MovieID = 0)
         {
             if (MovieID <= 0)
@@ -82,10 +84,9 @@ namespace MoviesAPI.Controllers
                 param.Add("@MovieID", MovieID);
                 DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
                 return RedirectToAction("GETALLMovies"); // to show its been removed
-
-
             }
         }
+
 
         public IActionResult UpdateMovie()
         {
@@ -93,28 +94,33 @@ namespace MoviesAPI.Controllers
         }
 
 
-        [HttpPut] // patch method
-        public ActionResult UpdateMovie(int MovieID = 0) // takes data in the format of our MovieModel class
+        [HttpPost] // patch method
+        public ActionResult UpdateMovie(MovieModel movieModel) // takes data in the format of our MovieModel class
         {
-            if (MovieID <= 0)
+            DynamicParameters param = new DynamicParameters(); //bag
+            param.Add("@MovieID", movieModel.MovieID);
+
+            int IDexists = DapperORM.checkID(movieModel.MovieID);
+
+            if (IDexists == 1)
             {
-                return View();
-            }
-            else
-            {
-                DynamicParameters param = new DynamicParameters(); //bag
-                param.Add("@MovieID", movieModel.MovieID);
                 param.Add("@MovieName", movieModel.MovieName); // adding these to our bag
                 param.Add("@AgeRating", movieModel.AgeRating);
                 param.Add("@Price", movieModel.Price);
                 param.Add("@ReleaseDate", movieModel.ReleaseDate);
                 param.Add("@Genre", movieModel.Genre);
-                DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
-
-
-                return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
+                DapperORM.ExecuteWithoutReturn("UpdateMovieByID", param);
+                return RedirectToAction("GETALLMovies");
+            }
+            else
+            {
+                ViewBag.Message = "Movie ID doesn't exist, please check listings again";
+                return View();
             }
         }
+        // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
+
+
 
 
 
@@ -134,8 +140,8 @@ namespace MoviesAPI.Controllers
             //    return View("HandleErrors/Error");
             //}
         }
-
     }
+    
 }
 
 

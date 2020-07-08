@@ -3,14 +3,16 @@
 
 @{
     ViewBag.Title = "Dotnetflix - Update Listing";
+    var ErrorMsg = ViewBag.Message;
 }
+
 
 <div class="form-group">
     <table style="width:30%">
-        <form method="PUT" action="UpdateMovie">
+        <form method="POST" action="UpdateMovie">
             <tr>
                 <td>Movie ID: </td>
-                <td><input name="MovieName" type="text" minlength="1" maxlength="4" required placeholder="e.g 1" /></td>
+                <td><input name="MovieID" type="number" minlength="1" maxlength="4" required placeholder="e.g 1" /></td>
             </tr>
             <tr>
                 <td>Title: </td>
@@ -45,3 +47,5 @@
         </form>
     </table>
 </div>
+
+<p>@ErrorMsg</p>
