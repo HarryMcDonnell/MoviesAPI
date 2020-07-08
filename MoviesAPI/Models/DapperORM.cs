@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MoviesAPI.Models
 {
@@ -46,7 +47,7 @@ namespace MoviesAPI.Models
                     con.Open();
                     return con.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure); // excecutes a query, returns the data types as T
                 }
-
+            }
+            
         }
     }
-}
