@@ -87,6 +87,37 @@ namespace MoviesAPI.Controllers
             }
         }
 
+        public IActionResult UpdateMovie()
+        {
+            return View();
+        }
+
+
+        [HttpPut] // patch method
+        public ActionResult UpdateMovie(int MovieID = 0) // takes data in the format of our MovieModel class
+        {
+            if (MovieID <= 0)
+            {
+                return View();
+            }
+            else
+            {
+                DynamicParameters param = new DynamicParameters(); //bag
+                param.Add("@MovieID", movieModel.MovieID);
+                param.Add("@MovieName", movieModel.MovieName); // adding these to our bag
+                param.Add("@AgeRating", movieModel.AgeRating);
+                param.Add("@Price", movieModel.Price);
+                param.Add("@ReleaseDate", movieModel.ReleaseDate);
+                param.Add("@Genre", movieModel.Genre);
+                DapperORM.ExecuteWithoutReturn("CreateNewMovie", param);
+
+
+                return RedirectToAction("GETALLMovies"); // re direct to our get all movies page, to see it being added. Can we add it to our ADDMovie page underneath our form?
+            }
+        }
+
+
+
         public IActionResult Error(int code)
         {
             Console.WriteLine($"User received Error {code}.");

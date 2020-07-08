@@ -1,0 +1,47 @@
+﻿
+@model MoviesAPI.Models.MovieModel
+
+@{
+    ViewBag.Title = "Dotnetflix - Update Listing";
+}
+
+<div class="form-group">
+    <table style="width:30%">
+        <form method="PUT" action="UpdateMovie">
+            <tr>
+                <td>Movie ID: </td>
+                <td><input name="MovieName" type="text" minlength="1" maxlength="4" required placeholder="e.g 1" /></td>
+            </tr>
+            <tr>
+                <td>Title: </td>
+                <td><input name="MovieName" type="text" minlength="1" maxlength="75" required placeholder="e.g Bee Movie" /></td>
+            </tr>
+            <tr>
+                <td>Age Rating: </td>
+                <td>
+                    <input name="AgeRating" type="text" minlength="1" maxlength="3" required placeholder="e.g 12A" pattern="[A-Za-z]{2}|[0-9]{2}|[A-Za-z]{1}|[0-9]{2}[A-Za-z]{1}" title="Age Rating should be a single letter, age or age and letter format - e.g. 12A, U or 18" />
+                </td>
+            </tr>
+            <tr>
+                <td>Price (£): </td>
+                <td><input name="Price" type="number" step="any" min="0" max="99.99" required placeholder="e.g 2.99" /></td>
+            </tr>
+            <tr>
+                <td>Release Date: </td>
+                <td><input name="ReleaseDate" type="date" min="1753-01-01" max="9999-12-31" required style="width:inherit" /></td>
+            </tr>
+            <tr>
+                <td>Genre: </td>
+                <td><input name="Genre" type="text" minlength="1" maxlength="50" required placeholder="e.g Comedy, Drama" /></td>
+            </tr>
+            <tr>
+                <td><br /></td>
+                <td><br /></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td><input type="submit" for="submit" /></td>
+            </tr>
+        </form>
+    </table>
+</div>
