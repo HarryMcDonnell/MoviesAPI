@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstraplux.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body id="bootstrap-override">
+<body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-dark bg-dark border-bottom box-shadow shadow-lg mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Movies" asp-action="Index"><img src="~/img/dnf.png" height="35px" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,37 +19,38 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="GETMovie">Search</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="GETMovie">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="GETALLMovies">Movie Listings</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="GETALLMovies">All Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="ADDMovie">Add Listing</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="ADDMovie">Add Movie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="REMOVEMovie">Delete Listing</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="REMOVEMovie">Delete Movie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="UpdateMovie">Update Listings</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="UpdateMovie">Update Movie</a>
                         </li>
-                    </ul>
+                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 text-light">
+            <br />
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted border-dark text-center">
         <div class="container">
-            &copy; 2020 - MoviesAPI
+            Copyright &copy; 2020 Dotnetflix, Inc. All Rights Reserved. Need help? Tel: 0123-456-7890
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

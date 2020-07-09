@@ -2,61 +2,79 @@
 
 @{
     ViewData["Title"] = "Dotnetflix - Search Listing";
+    var ErrorMsg = ViewBag.Message;
+
+    var MovieID = ViewBag.MovieID;
+}
+<h3 class="text-light">SEARCH MOVIES</h3>
+<br />
+<table style="width:30%">
+
+    <form method="GET" action="GETMovie">
+        <tr><td>Movie ID: </td><td><input name="MovieID" type="number" min="1" max="9999" required placeholder="e.g 7"></td></tr>
+        <tr><td><br /></td><td><br /></td></tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" for="submit" class="btn btn-sm btn-outline-light rounded" /></td>
+        </tr>
+    </form>
+</table>
+@if (MovieID > 0)
+{
+
+    <br />
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>
+                    Movie⠀ID
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Age⠀Rating
+                </th>
+                <th>
+                    Price⠀(£)
+                </th>
+                <th>
+                    Release⠀Date
+                </th>
+                <th>
+                    Genre(s)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgeRating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-
-<form method="GET" action="GETMovie">
-    Movie ID: <input name="MovieID" type="number" min="1" max="9999" required placeholder="e.g 7"/>
-    <input type="submit" for="submit" />
-</form><br/>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MovieID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MovieName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgeRating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MovieID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MovieName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgeRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<br />
+<p class="text-danger">@ErrorMsg</p>

@@ -5,11 +5,22 @@
     var ErrorMsg = ViewBag.Message;
 }
 
+<h3 class="text-light">DELETE MOVIE</h3>
+<br />
 
 
-<form method="DELETE" action="REMOVEMovie">
-    Movie ID: <input name="MovieID" type="number" min="1" max="9999" required placeholder="e.g 7" />
-    <input type="submit" for="submit" />
-</form>
+<table style="width:30%">
 
-<p>@ErrorMsg</p>
+    <form method="DELETE" action="REMOVEMovie">
+        <tr><td>Movie ID: </td><td><input name="MovieID" type="number" min="1" max="9999" required placeholder="e.g 7"></td></tr>
+        <tr><td><br /></td><td><br /></td></tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" for="submit" class="btn btn-sm btn-outline-light rounded" /></td>
+        </tr>
+    </form>
+</table>
+
+<br />
+
+<p class="text-danger">@ErrorMsg</p>

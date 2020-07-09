@@ -27,17 +27,35 @@ namespace MoviesAPI.Controllers
 
         public IActionResult GETMovie(bool jsonData, int MovieID = 0)// we want the Movie Id to start with 0 so it starts from the beginning. it needs to have a value 
         {
-            var dynamicParameters = new DynamicParameters(); //built in parameter bag.
-            dynamicParameters.Add("@MovieID", MovieID);// @ knowing its from the input value. will work without.
-            if (jsonData == true)
+
+            if (MovieID <= 0) //a catch so it cant be a blank 
             {
-                return Json(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters));
+                return View();
             }
-                return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", dynamicParameters)); // 1st param is stored procedure, second is parameter bag
+            else
+            {
+                ViewBag.MovieID = MovieID;
+                int IDexists = DapperORM.checkID(MovieID);
+
+                if (IDexists == 1)
+                {
+                    DynamicParameters param = new DynamicParameters(); //built in parameter bag.
+                    param.Add("@MovieID", MovieID);// @ knowing its from the input value. will work without.
+                    if (jsonData == true)
+                    {
+                        return Json(DapperORM.ReturnList<MovieModel>("SelectMovieByID", param));
+                    }
+                    return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", param)); // 1st param is stored procedure, second is parameter bag
+                } else
+                {
+                    ViewBag.MovieID = 0;
+                    ViewBag.Message = "Movie ID doesn't exist, please check the movie listings."; // catch if ID  doesn't exist.
+                    return View();
+                }
+            }
         }
 
-
-        public IActionResult REMOVEMovie(int MovieID = 0)
+public IActionResult REMOVEMovie(int MovieID = 0)
         {
             if (MovieID <= 0) //a catch so it cant be a blank 
             { 
@@ -55,7 +73,7 @@ namespace MoviesAPI.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Movie ID doesn't exist, please check listings again"; // catch if ID  doesn't exist.
+                    ViewBag.Message = "Movie ID doesn't exist, please check the movie listings."; // catch if ID  doesn't exist.
                     return View();
                 }
             }
@@ -115,7 +133,7 @@ namespace MoviesAPI.Controllers
             }
             else
             {
-                ViewBag.Message = "Movie ID doesn't exist, please check listings again";
+                ViewBag.Message = "Movie ID doesn't exist, please check the movie listings.";
                 return View();
             }
         }
