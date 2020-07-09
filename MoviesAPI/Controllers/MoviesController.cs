@@ -39,6 +39,44 @@ namespace MoviesAPI.Controllers
         }
 
 
+        public ActionResult REMOVEMovie(int MovieID = 0, bool movieSelected)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("@MovieID", MovieID);
+
+            if (MovieID <= 0)
+            { 
+                ViewBag.Message = "Movie ID doesn't exist, please check listings again";
+                return View();
+            }
+
+            else if (MovieID > 0 && movieSelected == false)
+            { 
+                return View(DapperORM.ReturnList<MovieModel>("SelectMovieByID", param));
+            }
+            else
+            {
+                DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
+                return RedirectToAction("GETALLMovies"); // to show its been removed
+            }
+        }
+
+        //public ActionResult REMOVEMovie(int MovieID = 0)
+        //{
+        //    if (MovieID <= 0)
+        //    {
+        //        return View();
+        //    }
+        //    else
+        //    {
+        //        DynamicParameters param = new DynamicParameters();
+        //        param.Add("@MovieID", MovieID);
+        //        DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
+        //        return RedirectToAction("GETALLMovies"); // to show its been removed
+        //    }
+        //}
+
+
         public IActionResult GETALLMovies(bool jsonData)
         {
             if (jsonData == true)
@@ -70,22 +108,6 @@ namespace MoviesAPI.Controllers
 
         }
 
-
-
-        public ActionResult REMOVEMovie(int MovieID = 0)
-        {
-            if (MovieID <= 0)
-            {
-                return View();
-            }
-            else
-            {
-                DynamicParameters param = new DynamicParameters();
-                param.Add("@MovieID", MovieID);
-                DapperORM.ReturnList<MovieModel>("DeleteMovie", param).FirstOrDefault<MovieModel>();
-                return RedirectToAction("GETALLMovies"); // to show its been removed
-            }
-        }
 
 
         public IActionResult UpdateMovie()
