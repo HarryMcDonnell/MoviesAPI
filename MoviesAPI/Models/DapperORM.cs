@@ -28,7 +28,7 @@ namespace MoviesAPI.Models
 
         }
 
-        public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param) // what is return scalar?
+        public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param)
         {
 
             using (SqlConnection con = new SqlConnection(connectionString))

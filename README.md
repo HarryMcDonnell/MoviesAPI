@@ -18,12 +18,11 @@ JSON based
 
 #Tasks
 
-#[x] visual studio - create an MVC app called MoviesAPI
+[x] visual studio - create an MVC app called MoviesAPI
 [x] create a Movie.cs model, a class model
 [x] create a movie controller:
-    [ ]All request params sent in body:
-    [ ]Username sent in Header
-    [ ]Username must not be null
+[x]All request params sent in body:
+  
 
 [ ] Create GetMovie method: Method to return movies details for a specific movie. using Input ID.
 
@@ -52,10 +51,9 @@ JSON based
     output:
     [x] Movie type
 
-
     GetMovie Error Handling:
     [ ]400 for invalid input type or null
-    [ ]404 for not found
+    [x]404 for not found
     [ ]500 for server error
 
 [ ] Create AddMovie Method:Method to insert a new movie record.
@@ -93,11 +91,11 @@ JSON based
     [ ]500 for server error
 
 
-#EXTENSIONS
+EXTENSIONS
 [ ]Create UpdateMovie Method:Method to update an existing movie.
 
     logging:
-    [ ]request and response to console
+    [x]request and response to console
 
     input:
     [x]All movie properties
@@ -116,10 +114,10 @@ JSON based
     [ ]500 for server error
 
 
-#[x]Azure data studio - create a database called MoviesDB
+[x]Azure data studio - create a database called MoviesDB
 [x] validation and returns json data
 
-#Extensions database:
+Extensions database:
 [x]SP Name: “GetMovie”
 input:
 [x]int Id
@@ -145,8 +143,7 @@ output:
 [x] Successful response from DB
 
 
-
-#[x] install Dapper nuget package
-#[x] connect MoviesAPI to database
-#[x] use postman to validate APIs created
-#[ ] Sign up to Swagger for API documentation
+[x] install Dapper nuget package
+[x] connect MoviesAPI to database
+[x] use postman to validate APIs created
+[ ] Sign up to Swagger for API documentation
